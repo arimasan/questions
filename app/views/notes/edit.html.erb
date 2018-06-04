@@ -1,6 +1,12 @@
-<h1>Editing Note</h1>
+<div class = "write_content">
 
 <%= render 'form', note: @note %>
 
 <%= link_to 'Show', @note %> |
 <%= link_to 'Back', notes_path %>
+</div>
+<div class = "view_content">
+	<h1><div id = "view_title">(タイトル)</div></h1>
+	<div id = "view_text">(本文)</div>
+</div>
+<div class = "clear">

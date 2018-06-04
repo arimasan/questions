@@ -15,10 +15,12 @@
     <%= form.text_field :title, id: :note_title %>
   </div>
   <div class="field">
-    <%= form.label :tag %>
-    <%= form.collection_select :tag, Tag.all, :id, :name %>
+    <div class="select-wrap">
+      <%= form.label :tag %>
+      <%= form.collection_select :tag, Tag.all, :id, :name, :selected => @tag %>
+    </div>
   </div>
-  
+
   <div class ="clear"></div>
   
   <div class="field">

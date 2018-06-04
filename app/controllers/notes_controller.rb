@@ -19,6 +19,8 @@ class NotesController < ApplicationController
 
   # GET /notes/1/edit
   def edit
+    @tag = Note.find(params[:id]).tags.ids
+
   end
 
   # POST /notes

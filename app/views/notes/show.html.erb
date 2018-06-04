@@ -1,21 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<h1>
+<div class = "show">
+	<div id = "date">
+	  最終更新：<%= @note.updated_at %>
+	</div>
+<div class = "title">
   <%= @note.title %>
-</h1>
-<p>
+</div>
+<div class = "tag_area">
     <% @note.tags.each do |tag| %>
-     <div class = "tag.name" >
+     <div class = "tag_name" >
       <%= tag.name %>
      </div>
     <% end %>
-</p>
+</div>
 
-<p>
-
+<div id="view_text">
   <%= to_reading(@note.content).html_safe %>
-</p>
+</div>
 
+</div>
 
 
 <%= link_to 'Edit', edit_note_path(@note) %> |
