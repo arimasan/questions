@@ -51,11 +51,12 @@ module NotesHelper
 	  	p return_texts
 	  	(return_texts.count/2).times do |i|
 	  		changed_text += return_texts[2*i]
-	  		changed_text += conversion[:tag_first]
-	  		changed_text +=	return_texts[2*i+1]
+	  		changed_text += conversion[:tag_first]  			
+	  		changed_text +=	return_texts[2*i+1].strip
 	  		changed_text += conversion[:tag_last]
 	  	end
 	  	changed_text+=return_texts.last
+
 	  	return_text = changed_text
 	end
 
@@ -75,7 +76,7 @@ module NotesHelper
 
   def range_conversions
   	conversions = [
-  		{pattern: /\*/ , tag_first:"<u><strong>" , tag_last: "</strong></u>"},  	
+  		{pattern: /\*/, tag_first:"<u><strong>" , tag_last: "</strong></u>"},  	
   	]
   end
 

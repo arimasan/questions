@@ -1,8 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
+<h1>
   <%= @note.title %>
+</h1>
+<p>
+    <% @note.tags.each do |tag| %>
+     <div class = "tag.name" >
+      <%= tag.name %>
+     </div>
+    <% end %>
 </p>
 
 <p>
@@ -10,12 +16,7 @@
   <%= to_reading(@note.content).html_safe %>
 </p>
 
-<p>
-  <strong>Tag:</strong>
-    <% @note.tags.each do |tag| %>
-      <%= tag.name %>
-    <% end %>
-</p>
+
 
 <%= link_to 'Edit', edit_note_path(@note) %> |
 <%= link_to 'Back', notes_path %>

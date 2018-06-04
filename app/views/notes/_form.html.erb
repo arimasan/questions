@@ -10,21 +10,23 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
     <%= form.label :title %>
     <%= form.text_field :title, id: :note_title %>
   </div>
-
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, id: :note_content %>
-  </div>
-
   <div class="field">
     <%= form.label :tag %>
     <%= form.collection_select :tag, Tag.all, :id, :name %>
   </div>
+  
+  <div class ="clear"></div>
+  
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :note_content %>
+  </div>
+  
+  <div class ="clear"></div>
 
   <div class="actions">
     <%= form.submit %>
