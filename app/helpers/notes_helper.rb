@@ -1,8 +1,15 @@
 module NotesHelper
 
+  def to_question(text)
+    return_text = sharp_to_tag(text)
+    return_text = range_surrounded_question(return_text,range_conversions_question)
+
+    return_text
+  end
+
   def to_reading(text)
   	return_text = sharp_to_tag(text)
-  	return_text = range_surrounded_tag(return_text)  	
+  	return_text = range_surrounded_tag(return_text,range_conversions)  	
 
     return_text
   end
@@ -10,7 +17,7 @@ module NotesHelper
   def sharp_to_tag(text)
 
   	conversions = line_conversions()
- 	text = text.gsub(/(\r\n|\r|\n)/, "<br />")
+   	text = text.gsub(/(\r\n|\r|\n)/, "<br />")
 
 
   	return_text = text
@@ -41,8 +48,8 @@ module NotesHelper
   	return_text
   end
 
-  def range_surrounded_tag(text)
-  	conversions = range_conversions()
+  def range_surrounded_tag(text,conv)
+  	conversions = conv
   	return_text = text  	
 
   	conversions.each do |conversion|  	
@@ -51,7 +58,7 @@ module NotesHelper
 	  	p return_texts
 	  	(return_texts.count/2).times do |i|
 	  		changed_text += return_texts[2*i]
-	  		changed_text += conversion[:tag_first]  			
+	  		changed_text += conversion[:tag_first]
 	  		changed_text +=	return_texts[2*i+1].strip
 	  		changed_text += conversion[:tag_last]
 	  	end
@@ -61,6 +68,28 @@ module NotesHelper
 	end
 
 	return_text
+  end
+
+  def range_surrounded_question(text,conv)
+    conversions = conv
+    return_text = text    
+
+    conversions.each do |conversion|    
+      changed_text = ""
+      return_texts = return_text.split(conversion[:pattern])
+      p return_texts
+      (return_texts.count/2).times do |i|
+        changed_text += return_texts[2*i]
+        changed_text += conversion[:tag_first]
+        changed_text += (return_texts[2*i+1].length*1.9).to_s
+        changed_text += conversion[:tag_last]
+      end
+      changed_text+=return_texts.last
+
+      return_text = changed_text
+  end
+
+  return_text
   end
 
   def line_conversions
@@ -78,6 +107,12 @@ module NotesHelper
   	conversions = [
   		{pattern: /\*/, tag_first:"<u><strong>" , tag_last: "</strong></u>"},  	
   	]
+  end
+
+  def range_conversions_question
+    conversions = [
+      {pattern: /\*/, tag_first:"<input type='text' id='show_question' size='" , tag_last: "'>"},
+    ]
   end
 
 end
