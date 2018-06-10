@@ -153,6 +153,16 @@ input {
   font-size:14px;
 }
 
+.blue_button input {
+  border : none;
+  background-color:#4286f4;
+  color:white;
+  border-radius:5px;
+  padding : 10px;
+  font-size : 12px;
+  margin-top : 50px;
+}
+
 #note_title{
   width:95%;
 }

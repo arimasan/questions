@@ -70,7 +70,31 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
   end
 
+  def show_answer
 
+  end
+
+  def answer_check
+    @note = Note.find(params[:note][:quest_id].to_i)
+      text = @note.content
+      texts = text.split("*")
+      answer_texts = []
+
+      (texts.count/2).times do |i|
+        answer_texts.push(texts[2*i+1].strip)
+      end
+
+      params[:answer].each do |attr|
+
+        if attr == answer_texts
+          
+        else
+
+        end
+
+      end
+
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

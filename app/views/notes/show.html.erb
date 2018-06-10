@@ -15,12 +15,16 @@
     <% end %>
 </div>
 
-<div id="view_text">
-  <%= to_reading(@note.content).html_safe %>
-</div>
+  <div id="view_text">
+    <%= to_reading(@note.content).html_safe %>
+  <% if @note.content.include?("*") %>
+    <div class = "blue_button">
+      <%= button_to '出題する' , url_for(action: :show_question) ,:method => :get %>
+    <% end %>
+    </div>
+  </div>
 
 </div>
-
 
 <%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+<%= link_to 'Back', notes_path %> 

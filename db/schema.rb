@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603145354) do
+ActiveRecord::Schema.define(version: 20180610140242) do
+
+  create_table "answers", force: :cascade do |t|
+    t.string "correct_answer"
+    t.string "practical_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "note_tags", force: :cascade do |t|
     t.integer "note_id"
@@ -24,6 +36,11 @@ ActiveRecord::Schema.define(version: 20180603145354) do
   create_table "notes", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "records", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

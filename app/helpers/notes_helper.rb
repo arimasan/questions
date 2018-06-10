@@ -48,6 +48,17 @@ module NotesHelper
   	return_text
   end
 
+  def range_check(text)
+    return_text = text    
+    return_texts = return_text.split(conversion[:pattern])
+      (return_texts.count/2).times do |i|
+        puts return_texts[2*i]
+        puts return_texts[2*i+1].strip
+      end
+
+    return_text
+  end
+
   def range_surrounded_tag(text,conv)
   	conversions = conv
   	return_text = text  	
@@ -55,14 +66,16 @@ module NotesHelper
   	conversions.each do |conversion|  	
 	  	changed_text = ""
 	  	return_texts = return_text.split(conversion[:pattern])
-	  	p return_texts
 	  	(return_texts.count/2).times do |i|
 	  		changed_text += return_texts[2*i]
 	  		changed_text += conversion[:tag_first]
 	  		changed_text +=	return_texts[2*i+1].strip
 	  		changed_text += conversion[:tag_last]
 	  	end
-	  	changed_text+=return_texts.last
+      
+      if return_texts.last
+	  	  changed_text+=return_texts.last
+      end
 
 	  	return_text = changed_text
 	end
@@ -77,11 +90,13 @@ module NotesHelper
     conversions.each do |conversion|    
       changed_text = ""
       return_texts = return_text.split(conversion[:pattern])
-      p return_texts
       (return_texts.count/2).times do |i|
         changed_text += return_texts[2*i]
         changed_text += conversion[:tag_first]
         changed_text += (return_texts[2*i+1].length*1.9).to_s
+
+        changed_text += "' name = 'answer[]"
+
         changed_text += conversion[:tag_last]
       end
       changed_text+=return_texts.last
@@ -111,7 +126,7 @@ module NotesHelper
 
   def range_conversions_question
     conversions = [
-      {pattern: /\*/, tag_first:"<input type='text' id='show_question' size='" , tag_last: "'>"},
+      {pattern: /\*/, tag_first:"<input type='text' class='show_question' size='" , tag_last: "'>"},
     ]
   end
 
