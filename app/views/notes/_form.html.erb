@@ -12,22 +12,24 @@
   <% end %>
   <div class="field">
     <%= form.label :title %>
-    <%= form.text_field :title, id: :note_title %>
+    <%= form.text_field :title, id: :note_title , :required => true %>
   </div>
   <div class="field">
-    <div class="select-wrap">
       <%= form.label :tag %>
       <%= form.collection_select :tag, Tag.all, :id, :name, :selected => @tag %>
-    </div>
+  </div>
+  <div class="field">
+    <%= form.label :このノートを公開する %>    
+    <%= form.check_box 'published_state_flag', {:id => :published_state_flag}, true, false %>
   </div>
 
   <div class ="clear"></div>
   
   <div class="field">
     <%= form.label :content %>
-    <%= form.text_area :content, id: :note_content %>
+    <%= form.text_area :content, id: :note_content , :required => true %>
   </div>
-  
+
   <div class ="clear"></div>
 
   <div class="actions">

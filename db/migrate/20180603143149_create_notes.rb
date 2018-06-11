@@ -4,7 +4,7 @@ class CreateNotes < ActiveRecord::Migration[5.1]
       t.string :title, :null => false
       t.text :content, :null => false
       t.references :user, index: true, foreign_key: true , :null => false
-      t.boolean :published_state
+      t.boolean :published_state, :null => false
 
       t.timestamps
     end

@@ -27,7 +27,11 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Note.new(title:params[:note][:title],content:params[:note][:content],user_id:current_user.id)
+    unless params[:note][:published_state_flag]
+      params[:note][:published_state_flag] = false
+    end
+
+    @note = Note.new(title:params[:note][:title],content:params[:note][:content],user_id:current_user.id,published_state:params[:note][:published_state_flag])
     @note_tag = NoteTag.new(tag_id: params[:note][:tag].to_i)
 
     respond_to do |format|
