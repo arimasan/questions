@@ -1,6 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
+  
   # GET /notes
   # GET /notes.json
   def index
@@ -87,7 +88,7 @@ class NotesController < ApplicationController
       params[:answer].each do |attr|
 
         if attr == answer_texts
-          
+
         else
 
         end
