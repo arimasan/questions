@@ -13,15 +13,21 @@
 ActiveRecord::Schema.define(version: 20180610143632) do
 
   create_table "answers", force: :cascade do |t|
+    t.integer "record_id"
     t.string "correct_answer"
     t.string "practical_answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["record_id"], name: "index_answers_on_record_id"
   end
 
   create_table "favorites", force: :cascade do |t|
+    t.integer "note_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_favorites_on_note_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "note_tags", force: :cascade do |t|
@@ -34,15 +40,22 @@ ActiveRecord::Schema.define(version: 20180610143632) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "user_id", null: false
+    t.boolean "published_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "records", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "note_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_records_on_note_id"
+    t.index ["user_id"], name: "index_records_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|

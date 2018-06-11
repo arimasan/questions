@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  
+
   # GET /notes
   # GET /notes.json
   def index
@@ -27,7 +27,7 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.json
   def create
-    @note = Note.new(title:params[:note][:title],content:params[:note][:content])
+    @note = Note.new(title:params[:note][:title],content:params[:note][:content],user_id:current_user.id)
     @note_tag = NoteTag.new(tag_id: params[:note][:tag].to_i)
 
     respond_to do |format|
