@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'notes#index'
+  get 'notes/search' => 'notes#search'
   get 'notes/:id/question/' => 'notes#show_question'
   get 'notes/:id/show_answer/' => 'notes#show_answer'
   patch 'answer_check' => 'notes#answer_check'

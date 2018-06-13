@@ -5,7 +5,7 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = Note.where(published_state:true)
   end
 
   # GET /notes/1
@@ -22,6 +22,14 @@ class NotesController < ApplicationController
   def edit
     @tag = Note.find(params[:id]).tags.ids
 
+  end
+
+  def search
+    result = Note.all
+    result = result.where("title like '%" + params[:search] + "%'")
+                   .or(result.where("content like '%" + params[:search] + "%'"))
+    @notes = result
+    render "index"
   end
 
   # POST /notes
